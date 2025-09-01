@@ -37,22 +37,47 @@ class RegexFactory:
     DERIVATIONAL = ['ост', 'ость']
 
     @staticmethod
-    def get_perfective_groups() -> str:
+    def get_perfective_gerund() -> str:
+        """
+        :return: Паттер для PERFECTIVE GERUND
+        """
         return RegexFactory.__assembling_groups(
             RegexFactory.PERFECTIVE_GERUND_GROUP_1,
             RegexFactory.PERFECTIVE_GERUND_GROUP_2,
         )
 
     @staticmethod
+    def get_participle() -> str:
+        """
+        :return: Паттерн для PARTICIPLE
+        """
+        return RegexFactory.__assembling_groups(
+            RegexFactory.PARTICIPLE_GROUP_1,
+            RegexFactory.PARTICIPLE_GROUP_2,
+        )
+
+    @staticmethod
+    def get_verb() -> str:
+        """
+        :return: Паттерн для VERB
+        """
+        return RegexFactory.__assembling_groups(
+            RegexFactory.VERB_GROUP_1,
+            RegexFactory.VERB_GROUP_2,
+        )
+
+    @staticmethod
     def __assembling_groups(group1: list[str], group2: list[str]) -> str:
         """
+        Собирает группу для регулярного выражения, если группа состоит из 2х групп
+
         :param group1: Первая группа, которая должна начинаться с а или я
         :param group2: Вторая группа
         :return: Паттер для требуемой группы
         """
-        return (f'(?<=[ая])({RegexFactory.__get_pattern_group(RegexFactory.PERFECTIVE_GERUND_GROUP_1)})$'
-                f'|(?<=\w)({RegexFactory.__get_pattern_group(RegexFactory.PERFECTIVE_GERUND_GROUP_2)})$')
+        return (rf'(?<=[ая])({RegexFactory.__assembling_group(group1)})$'
+                rf'|(?<=\w)({RegexFactory.__assembling_group(group2)})$')
 
     @staticmethod
-    def __get_pattern_group(ls: list) -> str:
-        return '|'.join(ls)
+    def __assembling_group(ls: list) -> str:
+        return r'|'.join(ls)
