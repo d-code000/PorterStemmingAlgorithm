@@ -38,33 +38,48 @@ class RegexFactory:
 
     @staticmethod
     def get_perfective_gerund() -> str:
-        """
-        :return: Паттер для PERFECTIVE GERUND
-        """
         return RegexFactory.__assembling_groups(
             RegexFactory.PERFECTIVE_GERUND_GROUP_1,
             RegexFactory.PERFECTIVE_GERUND_GROUP_2,
         )
 
     @staticmethod
+    def get_adjective() -> str:
+        return RegexFactory.__assembling_group(RegexFactory.ADJECTIVE)
+
+    @staticmethod
     def get_participle() -> str:
-        """
-        :return: Паттерн для PARTICIPLE
-        """
         return RegexFactory.__assembling_groups(
             RegexFactory.PARTICIPLE_GROUP_1,
             RegexFactory.PARTICIPLE_GROUP_2,
         )
 
     @staticmethod
+    def get_reflexive() -> str:
+        return RegexFactory.__assembling_group(RegexFactory.REFLEXIVE)
+
+    @staticmethod
     def get_verb() -> str:
-        """
-        :return: Паттерн для VERB
-        """
         return RegexFactory.__assembling_groups(
             RegexFactory.VERB_GROUP_1,
             RegexFactory.VERB_GROUP_2,
         )
+
+    @staticmethod
+    def get_noun() -> str:
+        return RegexFactory.__assembling_group(RegexFactory.NOUN)
+
+    @staticmethod
+    def get_superlative() -> str:
+        return RegexFactory.__assembling_group(RegexFactory.SUPERLATIVE)
+
+    @staticmethod
+    def get_derivational() -> str:
+        return RegexFactory.__assembling_group(RegexFactory.DERIVATIONAL)
+
+    @staticmethod
+    def get_adjectival() -> str:
+        return rf'\w+?(({RegexFactory.get_participle()})?({RegexFactory.get_adjective()}))'
 
     @staticmethod
     def __assembling_groups(group1: list[str], group2: list[str]) -> str:
@@ -75,8 +90,8 @@ class RegexFactory:
         :param group2: Вторая группа
         :return: Паттер для требуемой группы
         """
-        return (rf'(?<=[ая])({RegexFactory.__assembling_group(group1)})$'
-                rf'|(?<=\w)({RegexFactory.__assembling_group(group2)})$')
+        return (rf'(?<=[ая])({RegexFactory.__assembling_group(group1)})'
+                rf'|(?<=\w)({RegexFactory.__assembling_group(group2)})')
 
     @staticmethod
     def __assembling_group(ls: list) -> str:
