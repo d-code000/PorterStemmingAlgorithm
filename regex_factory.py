@@ -37,6 +37,14 @@ class RegexFactory:
     DERIVATIONAL = ['ост', 'ость']
 
     @staticmethod
+    def __ending(func):
+        def wrapper(*args, end=True, **kwargs):
+            result = func(*args, **kwargs)
+            return f'({result})$' if end else result
+        return wrapper
+
+    @staticmethod
+    @__ending
     def get_perfective_gerund() -> str:
         return RegexFactory.__assembling_groups(
             RegexFactory.PERFECTIVE_GERUND_GROUP_1,
@@ -44,10 +52,12 @@ class RegexFactory:
         )
 
     @staticmethod
+    @__ending
     def get_adjective() -> str:
         return RegexFactory.__assembling_group(RegexFactory.ADJECTIVE)
 
     @staticmethod
+    @__ending
     def get_participle() -> str:
         return RegexFactory.__assembling_groups(
             RegexFactory.PARTICIPLE_GROUP_1,
@@ -55,10 +65,12 @@ class RegexFactory:
         )
 
     @staticmethod
+    @__ending
     def get_reflexive() -> str:
         return RegexFactory.__assembling_group(RegexFactory.REFLEXIVE)
 
     @staticmethod
+    @__ending
     def get_verb() -> str:
         return RegexFactory.__assembling_groups(
             RegexFactory.VERB_GROUP_1,
@@ -66,20 +78,24 @@ class RegexFactory:
         )
 
     @staticmethod
+    @__ending
     def get_noun() -> str:
         return RegexFactory.__assembling_group(RegexFactory.NOUN)
 
     @staticmethod
+    @__ending
     def get_superlative() -> str:
         return RegexFactory.__assembling_group(RegexFactory.SUPERLATIVE)
 
     @staticmethod
+    @__ending
     def get_derivational() -> str:
         return RegexFactory.__assembling_group(RegexFactory.DERIVATIONAL)
 
     @staticmethod
+    @__ending
     def get_adjectival() -> str:
-        return rf'\w+?(({RegexFactory.get_participle()})?({RegexFactory.get_adjective()}))'
+        return rf'\w+?(({RegexFactory.get_participle(end=False)})?({RegexFactory.get_adjective(end=False)}))'
 
     @staticmethod
     def __assembling_groups(group1: list[str], group2: list[str]) -> str:
