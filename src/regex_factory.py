@@ -57,7 +57,6 @@ class RegexFactory:
         return RegexFactory.__assembling_group(RegexFactory.ADJECTIVE)
 
     @staticmethod
-    @__ending
     def get_participle() -> str:
         return RegexFactory.__assembling_groups(
             RegexFactory.PARTICIPLE_GROUP_1,
@@ -95,7 +94,7 @@ class RegexFactory:
     @staticmethod
     @__ending
     def get_adjectival() -> str:
-        return rf'\w+?(({RegexFactory.get_participle(end=False)})?({RegexFactory.get_adjective(end=False)}))'
+        return rf'\w+?(({RegexFactory.get_participle()})?({RegexFactory.get_adjective(end=False)}))'
 
     @staticmethod
     def __assembling_groups(group1: list[str], group2: list[str]) -> str:
