@@ -31,7 +31,6 @@ class PorterStemmer:
         patterns = [
             RegexFactory.get_perfective_gerund(),
             RegexFactory.get_reflexive(),
-            RegexFactory.get_adjectival(),
             RegexFactory.get_verb(),
             RegexFactory.get_noun()
         ]
@@ -39,6 +38,10 @@ class PorterStemmer:
         for pattern in patterns:
             match = re.search(pattern, word)
             if match: return len(match.group(0))
+
+        match = re.search(RegexFactory.get_adjectival(), word)
+        if match: return len(match.group(1))
+
         return 0
 
     @staticmethod
