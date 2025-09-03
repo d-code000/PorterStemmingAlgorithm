@@ -1,5 +1,4 @@
 class RegexFactory:
-    VOWELS = 'аеиоуыэюя'
 
     PERFECTIVE_GERUND_GROUP_1 = ['в', 'вши', 'вшись']
     PERFECTIVE_GERUND_GROUP_2 = ['ив', 'ивши', 'ившись', 'ыв', 'ывши', 'ывшись']
