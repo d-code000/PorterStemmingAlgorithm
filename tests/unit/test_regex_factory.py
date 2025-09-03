@@ -6,11 +6,11 @@ from regex_factory import RegexFactory
 
 
 @pytest.fixture(scope='module')
-def regex_factory():
+def regex_factory() -> RegexFactory:
     return RegexFactory()
 
 
-def test_perfective_gerund(regex_factory: RegexFactory):
+def test_perfective_gerund(regex_factory: RegexFactory) -> None:
     pattern = regex_factory.get_perfective_gerund()
 
     # Группа 1
@@ -22,14 +22,14 @@ def test_perfective_gerund(regex_factory: RegexFactory):
     assert re.search(pattern, 'встретивши').group() == 'ивши'
 
 
-def test_adjective(regex_factory: RegexFactory):
+def test_adjective(regex_factory: RegexFactory) -> None:
     pattern = regex_factory.get_adjective()
 
     assert re.search(pattern, 'красивее').group() == 'ее'
     assert re.search(pattern, 'красивого').group() == 'ого'
 
 
-def test_participle(regex_factory: RegexFactory):
+def test_participle(regex_factory: RegexFactory) -> None:
     pattern = regex_factory.get_participle()
 
     # Группа 1
@@ -41,7 +41,7 @@ def test_participle(regex_factory: RegexFactory):
     assert re.search(pattern, 'стримивший').group() == 'ивш'
 
 
-def test_adjectival(regex_factory: RegexFactory):
+def test_adjectival(regex_factory: RegexFactory) -> None:
     pattern = regex_factory.get_adjectival()
 
     # ADJECTIVE
