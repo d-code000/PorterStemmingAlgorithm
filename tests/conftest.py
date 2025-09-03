@@ -10,5 +10,5 @@ def stemmer() -> PorterStemmer:
 
 @pytest.fixture(scope='function')
 def words() -> list[str]:
-    with open('russian_words.txt', 'r', encoding='utf-8') as file:
+    with open('data/russian_words_10.txt', 'r', encoding='utf-8') as file:
         return file.read().split()
