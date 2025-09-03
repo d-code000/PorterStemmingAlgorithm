@@ -93,6 +93,9 @@ class RegexFactory:
     @staticmethod
     @__ending
     def get_adjectival() -> str:
+        """
+        Целевая группа для удаления находится в match под индексом 1
+        """
         return rf'\w+?(({RegexFactory.get_participle()})?({RegexFactory.get_adjective(end=False)}))'
 
     @staticmethod
