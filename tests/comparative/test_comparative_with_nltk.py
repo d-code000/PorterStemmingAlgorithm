@@ -11,4 +11,4 @@ def nltk_stemmer() -> SnowballStemmer:
 
 def test_comparate(stemmer: PorterStemmer, nltk_stemmer: SnowballStemmer, words: list[str]) -> None:
     for word in words:
-        assert stemmer.stem(word) == nltk_stemmer.stem(word)
+        assert stemmer.stem(word) == nltk_stemmer.stem(word), f'Stemming mismatch for word: {word}'
