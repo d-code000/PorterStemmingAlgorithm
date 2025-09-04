@@ -108,7 +108,7 @@ class RegexFactory:
         :return: Паттер для требуемой группы
         """
         return (rf'(?<=[ая])({RegexFactory.__assembling_group(group1)})'
-                rf'|(?<=\w)({RegexFactory.__assembling_group(group2)})')
+                rf'|({RegexFactory.__assembling_group(group2)})')
 
     @staticmethod
     def __assembling_group(ls: list) -> str:

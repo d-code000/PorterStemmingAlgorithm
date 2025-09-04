@@ -21,12 +21,16 @@ def test_perfective_gerund(regex_factory: RegexFactory) -> None:
     assert re.search(pattern, 'встретив').group() == 'ив'
     assert re.search(pattern, 'встретивши').group() == 'ивши'
 
+    assert re.search(pattern, 'ив').group() == 'ив'
+
 
 def test_adjective(regex_factory: RegexFactory) -> None:
     pattern = regex_factory.get_adjective()
 
     assert re.search(pattern, 'красивее').group() == 'ее'
     assert re.search(pattern, 'красивого').group() == 'ого'
+
+    assert re.search(pattern, 'ее').group() == 'ее'
 
 
 def test_participle(regex_factory: RegexFactory) -> None:
@@ -40,6 +44,8 @@ def test_participle(regex_factory: RegexFactory) -> None:
     assert re.search(pattern, 'пингующий').group() == 'ующ'
     assert re.search(pattern, 'стримивший').group() == 'ивш'
 
+    assert re.search(pattern, 'ующ').group() == 'ующ'
+
 
 def test_adjectival(regex_factory: RegexFactory) -> None:
     pattern = regex_factory.get_adjectival()
@@ -49,5 +55,7 @@ def test_adjectival(regex_factory: RegexFactory) -> None:
 
     # PARTICIPLE + ADJECTIVE
     assert re.search(pattern, 'бегавшая').groups()[1] == 'вшая'
+
+    assert re.search(pattern, 'вшая').group() == 'вшая'
 
 # Todo: дописать тесты для других групп окончаний
