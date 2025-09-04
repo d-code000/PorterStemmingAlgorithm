@@ -34,20 +34,29 @@ class PorterStemmer:
 
     @staticmethod
     def __step1(area: str) -> int:
+
+        # Пробуем PERFECTIVE GERUND
+        perfective_gerund_len = PorterStemmer.__get_match_len(area, RegexFactory.get_perfective_gerund())
+        if perfective_gerund_len > 0: return perfective_gerund_len
+
+        # Иначе пробуем REFLEXIVE
+        remove_len = 0
+        match = re.search(RegexFactory.get_reflexive(), area)
+        if match: remove_len += len(match.group(0))
+        new_area = area[:len(area) - remove_len]
+
         patterns = [
             # Паттерн - целевая группа
-            [RegexFactory.get_perfective_gerund(), 1],
-            [RegexFactory.get_reflexive(), 1],
             [RegexFactory.get_adjectival(), 2],
             [RegexFactory.get_verb(), 1],
             [RegexFactory.get_noun(), 1]
         ]
 
         for pattern, target_group in patterns:
-            match_len = PorterStemmer.__get_match_len(area, pattern, target_group)
-            if match_len > 0: return match_len
+            match_len = PorterStemmer.__get_match_len(new_area, pattern, target_group)
+            if match_len > 0: return remove_len + match_len
 
-        return 0
+        return remove_len
 
     @staticmethod
     def __step2(area: str) -> int:
