@@ -60,7 +60,7 @@ class PorterStemmer:
 
     @staticmethod
     def __step2(area: str) -> int:
-        return PorterStemmer.__get_match_len(area, r'\b(\w+)и\b')
+        return PorterStemmer.__get_match_len(area, r'\b\w*(и)\b', 1)
 
     @staticmethod
     def __step3(area: str) -> int:

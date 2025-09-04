@@ -8,3 +8,4 @@ def test_stem(stemmer: PorterStemmer) -> None:
     assert stemmer.stem('являться') == 'явля'
     assert stemmer.stem('стоит') == 'сто'
     assert stemmer.stem('полностью') == 'полност'
+    assert stemmer.stem('радио') == 'рад'
