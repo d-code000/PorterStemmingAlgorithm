@@ -107,7 +107,7 @@ class RegexFactory:
         :param group2: Вторая группа
         :return: Паттер для требуемой группы
         """
-        return (rf'(?<=[ая])({RegexFactory.__assembling_group(group1)})'
+        return (rf'((?<=[ая])({RegexFactory.__assembling_group(group1)}))'
                 rf'|({RegexFactory.__assembling_group(group2)})')
 
     @staticmethod

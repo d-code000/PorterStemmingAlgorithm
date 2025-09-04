@@ -111,7 +111,9 @@ class PorterStemmer:
         """
         r1_index = PorterStemmer.__get_r1_index(word)
         if r1_index is None: return None
-        return PorterStemmer.__get_r1_index(word[r1_index:])
+        r1_index_two = PorterStemmer.__get_r1_index(word[r1_index:])
+        if r1_index_two is None: return r1_index
+        return r1_index + r1_index_two
 
     @staticmethod
     def __get_match_len(area: str, pattern: str, target_group=0) -> int:
