@@ -2,15 +2,15 @@ import re
 
 import pytest
 
-from regex_factory import RegexFactory
+from regex_factory import _RegexFactory
 
 
 @pytest.fixture(scope='module')
-def regex_factory() -> RegexFactory:
-    return RegexFactory()
+def regex_factory() -> _RegexFactory:
+    return _RegexFactory()
 
 
-def test_perfective_gerund(regex_factory: RegexFactory) -> None:
+def test_perfective_gerund(regex_factory: _RegexFactory) -> None:
     pattern = regex_factory.get_perfective_gerund()
 
     # Группа 1
@@ -24,7 +24,7 @@ def test_perfective_gerund(regex_factory: RegexFactory) -> None:
     assert re.search(pattern, 'ив').group() == 'ив'
 
 
-def test_adjective(regex_factory: RegexFactory) -> None:
+def test_adjective(regex_factory: _RegexFactory) -> None:
     pattern = regex_factory.get_adjective()
 
     assert re.search(pattern, 'красивее').group() == 'ее'
@@ -33,7 +33,7 @@ def test_adjective(regex_factory: RegexFactory) -> None:
     assert re.search(pattern, 'ее').group() == 'ее'
 
 
-def test_participle(regex_factory: RegexFactory) -> None:
+def test_participle(regex_factory: _RegexFactory) -> None:
     pattern = regex_factory.get_participle()
 
     # Группа 1
@@ -47,7 +47,7 @@ def test_participle(regex_factory: RegexFactory) -> None:
     assert re.search(pattern, 'ующ').group() == 'ующ'
 
 
-def test_adjectival(regex_factory: RegexFactory) -> None:
+def test_adjectival(regex_factory: _RegexFactory) -> None:
     pattern = regex_factory.get_adjectival()
 
     # ADJECTIVE

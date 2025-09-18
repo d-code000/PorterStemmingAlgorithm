@@ -1,6 +1,6 @@
 import re
 
-from regex_factory import RegexFactory
+from regex_factory import _RegexFactory
 
 
 class PorterStemmer:
@@ -36,20 +36,20 @@ class PorterStemmer:
     def __step1(area: str) -> int:
 
         # Пробуем PERFECTIVE GERUND
-        perfective_gerund_len = PorterStemmer.__get_match_len(area, RegexFactory.get_perfective_gerund())
+        perfective_gerund_len = PorterStemmer.__get_match_len(area, _RegexFactory.get_perfective_gerund())
         if perfective_gerund_len > 0: return perfective_gerund_len
 
         # Иначе пробуем REFLEXIVE
         remove_len = 0
-        match = re.search(RegexFactory.get_reflexive(), area)
+        match = re.search(_RegexFactory.get_reflexive(), area)
         if match: remove_len += len(match.group(0))
         new_area = area[:len(area) - remove_len]
 
         patterns = [
             # Паттерн - целевая группа
-            [RegexFactory.get_adjectival(), 2],
-            [RegexFactory.get_verb(), 1],
-            [RegexFactory.get_noun(), 1]
+            [_RegexFactory.get_adjectival(), 2],
+            [_RegexFactory.get_verb(), 1],
+            [_RegexFactory.get_noun(), 1]
         ]
 
         for pattern, target_group in patterns:
@@ -64,12 +64,12 @@ class PorterStemmer:
 
     @staticmethod
     def __step3(area: str) -> int:
-        return PorterStemmer.__get_match_len(area, RegexFactory.get_derivational())
+        return PorterStemmer.__get_match_len(area, _RegexFactory.get_derivational())
 
     @staticmethod
     def __step4(area: str) -> int:
         remove_len = 0
-        match = re.search(RegexFactory.get_superlative(), area)
+        match = re.search(_RegexFactory.get_superlative(), area)
         if match: remove_len += len(match.group(0))
         new_area = area[:len(area) - remove_len]
         if len(new_area) >= 2 and new_area[-2:] == 'нн':

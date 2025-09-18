@@ -1,4 +1,4 @@
-class RegexFactory:
+class _RegexFactory:
 
     PERFECTIVE_GERUND_GROUP_1 = ['в', 'вши', 'вшись']
     PERFECTIVE_GERUND_GROUP_2 = ['ив', 'ивши', 'ившись', 'ыв', 'ывши', 'ывшись']
@@ -45,50 +45,50 @@ class RegexFactory:
     @staticmethod
     @__ending
     def get_perfective_gerund() -> str:
-        return RegexFactory.__assembling_groups(
-            RegexFactory.PERFECTIVE_GERUND_GROUP_1,
-            RegexFactory.PERFECTIVE_GERUND_GROUP_2,
+        return _RegexFactory.__assembling_groups(
+            _RegexFactory.PERFECTIVE_GERUND_GROUP_1,
+            _RegexFactory.PERFECTIVE_GERUND_GROUP_2,
         )
 
     @staticmethod
     @__ending
     def get_adjective() -> str:
-        return RegexFactory.__assembling_group(RegexFactory.ADJECTIVE)
+        return _RegexFactory.__assembling_group(_RegexFactory.ADJECTIVE)
 
     @staticmethod
     def get_participle() -> str:
-        return RegexFactory.__assembling_groups(
-            RegexFactory.PARTICIPLE_GROUP_1,
-            RegexFactory.PARTICIPLE_GROUP_2,
+        return _RegexFactory.__assembling_groups(
+            _RegexFactory.PARTICIPLE_GROUP_1,
+            _RegexFactory.PARTICIPLE_GROUP_2,
         )
 
     @staticmethod
     @__ending
     def get_reflexive() -> str:
-        return RegexFactory.__assembling_group(RegexFactory.REFLEXIVE)
+        return _RegexFactory.__assembling_group(_RegexFactory.REFLEXIVE)
 
     @staticmethod
     @__ending
     def get_verb() -> str:
-        return RegexFactory.__assembling_groups(
-            RegexFactory.VERB_GROUP_1,
-            RegexFactory.VERB_GROUP_2,
+        return _RegexFactory.__assembling_groups(
+            _RegexFactory.VERB_GROUP_1,
+            _RegexFactory.VERB_GROUP_2,
         )
 
     @staticmethod
     @__ending
     def get_noun() -> str:
-        return RegexFactory.__assembling_group(RegexFactory.NOUN)
+        return _RegexFactory.__assembling_group(_RegexFactory.NOUN)
 
     @staticmethod
     @__ending
     def get_superlative() -> str:
-        return RegexFactory.__assembling_group(RegexFactory.SUPERLATIVE)
+        return _RegexFactory.__assembling_group(_RegexFactory.SUPERLATIVE)
 
     @staticmethod
     @__ending
     def get_derivational() -> str:
-        return RegexFactory.__assembling_group(RegexFactory.DERIVATIONAL)
+        return _RegexFactory.__assembling_group(_RegexFactory.DERIVATIONAL)
 
     @staticmethod
     @__ending
@@ -96,7 +96,7 @@ class RegexFactory:
         """
         Целевая группа для удаления находится в match под индексом 1
         """
-        return rf'\w+?(({RegexFactory.get_participle()})?({RegexFactory.get_adjective(end=False)}))'
+        return rf'\w+?(({_RegexFactory.get_participle()})?({_RegexFactory.get_adjective(end=False)}))'
 
     @staticmethod
     def __assembling_groups(group1: list[str], group2: list[str]) -> str:
@@ -107,8 +107,8 @@ class RegexFactory:
         :param group2: Вторая группа
         :return: Паттер для требуемой группы
         """
-        return (rf'((?<=[ая])({RegexFactory.__assembling_group(group1)}))'
-                rf'|({RegexFactory.__assembling_group(group2)})')
+        return (rf'((?<=[ая])({_RegexFactory.__assembling_group(group1)}))'
+                rf'|({_RegexFactory.__assembling_group(group2)})')
 
     @staticmethod
     def __assembling_group(ls: list) -> str:
